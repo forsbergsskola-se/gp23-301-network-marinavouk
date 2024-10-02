@@ -1,0 +1,6 @@
+@MultiPlayer_HostAddress = http://localhost:5252
+
+GET {{MultiPlayer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

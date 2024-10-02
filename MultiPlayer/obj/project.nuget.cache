@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "dgSpecHash": "sjzmfzqLLmA=",
+  "success": false,
+  "projectFilePath": "C:\\Projects\\gp23-301-network-marinavouk\\MultiPlayer\\MultiPlayer.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "Unable to resolve 'Microsoft.AspNetCore.OpenApi (>= 8.0.7)' for 'net8.0'. PackageSourceMapping is enabled, the following source(s) were not considered: nuget.org.",
+      "libraryId": "Microsoft.AspNetCore.OpenApi",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "Unable to resolve 'Swashbuckle.AspNetCore (>= 6.4.0)' for 'net8.0'. PackageSourceMapping is enabled, the following source(s) were not considered: nuget.org.",
+      "libraryId": "Swashbuckle.AspNetCore",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
+}
