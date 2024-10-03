@@ -18,27 +18,45 @@ app.UseHttpsRedirection();
 
 List<LobbyServer> lobbies = new List<LobbyServer>();
 
-app.MapPost("/Create a lobby", (string lobbyId, string? hostId) =>
+app.MapPost("/CreateLobby", (string lobbyId, string hostId, string hostName) =>
 {
+    var hostPlayer = new Player
+    {
+        Id = 0,  
+        Name = hostName
+    };
+    
     var newLobby = new LobbyServer
     {
         LobbyId = lobbyId,
-        HostId = hostId
+        HostId = hostId,
+        Players = new List<Player> { hostPlayer }
     };
 
     lobbies.Add(newLobby);
     return Results.Ok(newLobby);
 });
 
-app.MapPost("/Join lobbies", (string lobbyId, Player player) =>
+
+app.MapPost("/JoinLobby", (string lobbyId, long playerId, string playerName) =>
 {
     var lobby = lobbies.FirstOrDefault(l => l.LobbyId == lobbyId);
     if (lobby == null)
         return Results.NotFound("Lobby not found");
+    
+    if (lobby.Players.Any(p => p.Id == playerId))
+        return Results.BadRequest("Player already in the lobby");
+    
+    var player = new Player
+    {
+        Id = playerId,
+        Name = playerName
+    };
 
     lobby.Players.Add(player);
     return Results.Ok("Player added to the lobby");
 });
+
 
 app.MapGet("/lobbies", () =>
 {
@@ -79,7 +97,6 @@ public class Player
 {
     public long Id { get; set; }
     public string? Name { get; set; }
-    public bool IsActive { get; set; }
 }
 
 public class LobbyServer
