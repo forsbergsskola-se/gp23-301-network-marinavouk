@@ -42,3 +42,14 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
+// create list of lobbies and store their data
+// create players info
+//
+
+public class Player
+{
+    public long Id { get; set; }
+    public string? Name { get; set; }
+    public bool IsActive { get; set; }
+}
