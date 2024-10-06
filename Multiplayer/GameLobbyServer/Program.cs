@@ -38,13 +38,13 @@ app.MapPost("/CreateLobby", (string lobbyId, string hostId, string hostName) =>
 });
 
 
-app.MapPost("/JoinLobby", (string lobbyId, long playerId, string playerName) =>
+app.MapPost("/JoinLobby", (string lobbyId, int playerId, string playerName) =>
 {
-    var lobby = lobbies.FirstOrDefault(l => l.LobbyId == lobbyId);
+    var lobby = lobbies.FirstOrDefault(lobby => lobby.LobbyId == lobbyId);
     if (lobby == null)
         return Results.NotFound("Lobby not found");
     
-    if (lobby.Players.Any(p => p.Id == playerId))
+    if (lobby.Players.Any(player => player.Id == playerId))
         return Results.BadRequest("Player already in the lobby");
     
     var player = new Player
@@ -65,11 +65,11 @@ app.MapGet("/lobbies", () =>
 
 app.MapPost("/RemovePlayer", (string lobbyId, long playerId) =>
 {
-    var lobby = lobbies.FirstOrDefault(l => l.LobbyId == lobbyId);
+    var lobby = lobbies.FirstOrDefault(lobby => lobby.LobbyId == lobbyId);
     if (lobby == null)
         return Results.NotFound("Lobby not found");
 
-    var player = lobby.Players.FirstOrDefault(p => p.Id == playerId);
+    var player = lobby.Players.FirstOrDefault(player => player.Id == playerId);
     if (player == null)
         return Results.NotFound("Player not found in the lobby");
 
@@ -79,7 +79,7 @@ app.MapPost("/RemovePlayer", (string lobbyId, long playerId) =>
 
 app.MapDelete("/CloseLobby", (string lobbyId) =>
 {
-    var lobby = lobbies.FirstOrDefault(l => l.LobbyId == lobbyId);
+    var lobby = lobbies.FirstOrDefault(lobby => lobby.LobbyId == lobbyId);
     if (lobby == null)
         return Results.NotFound("Lobby not found");
 
@@ -91,13 +91,12 @@ app.Run();
 
 public class Player
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
     public string? Name { get; set; }
 }
 
 public class LobbyServer
 {
-
     public string? LobbyId { get; set; }
     public string? HostId { get; set; }
     public List<Player> Players { get; set; } = new List<Player>();
