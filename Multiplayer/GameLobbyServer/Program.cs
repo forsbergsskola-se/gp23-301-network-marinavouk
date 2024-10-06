@@ -89,10 +89,6 @@ app.MapDelete("/CloseLobby", (string lobbyId) =>
   
 app.Run();
 
-
-// create list of lobbies and store their data
-// create players info
-//
 public class Player
 {
     public long Id { get; set; }
