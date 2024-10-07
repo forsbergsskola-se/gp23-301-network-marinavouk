@@ -18,7 +18,7 @@ app.UseHttpsRedirection();
 
 List<LobbyServer> lobbies = new List<LobbyServer>();
 
-app.MapPost("/CreateLobby", (string lobbyId, string hostId, string hostName) =>
+app.MapPost("CreateLobby", (string lobbyId, string hostId, string hostName) =>
 {
     var hostPlayer = new Player
     {
@@ -38,7 +38,7 @@ app.MapPost("/CreateLobby", (string lobbyId, string hostId, string hostName) =>
 });
 
 
-app.MapPost("/JoinLobby", (string lobbyId, int playerId, string playerName) =>
+app.MapPost("JoinLobby", (string lobbyId, int playerId, string playerName) =>
 {
     var lobby = lobbies.FirstOrDefault(lobby => lobby.LobbyId == lobbyId);
     if (lobby == null)
@@ -58,12 +58,12 @@ app.MapPost("/JoinLobby", (string lobbyId, int playerId, string playerName) =>
 });
 
 
-app.MapGet("/lobbies", () =>
+app.MapGet("Lobbies", () =>
 {
     return Results.Ok(lobbies);
 });
 
-app.MapPost("/RemovePlayer", (string lobbyId, long playerId) =>
+app.MapPost("RemovePlayer", (string lobbyId, long playerId) =>
 {
     var lobby = lobbies.FirstOrDefault(lobby => lobby.LobbyId == lobbyId);
     if (lobby == null)
@@ -77,7 +77,7 @@ app.MapPost("/RemovePlayer", (string lobbyId, long playerId) =>
     return Results.Ok($"Player {playerId} removed from lobby {lobbyId}");
 });
 
-app.MapDelete("/CloseLobby", (string lobbyId) =>
+app.MapDelete("CloseLobby", (string lobbyId) =>
 {
     var lobby = lobbies.FirstOrDefault(lobby => lobby.LobbyId == lobbyId);
     if (lobby == null)
