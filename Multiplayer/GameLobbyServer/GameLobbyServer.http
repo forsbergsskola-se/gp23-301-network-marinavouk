@@ -1,0 +1,6 @@
+@GameLobbyServer_HostAddress = http://localhost:5109
+
+GET {{GameLobbyServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
