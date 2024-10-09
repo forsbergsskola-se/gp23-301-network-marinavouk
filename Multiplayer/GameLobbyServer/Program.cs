@@ -1,7 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -38,10 +36,10 @@ app.MapPost("CreateLobby", (string lobbyId, string hostId, string hostName) =>
 });
 
 
-app.MapPost("JoinLobby", (string lobbyId, int playerId, string playerName) =>
+app.MapPost("JoinLobby", (string lobbyId, int playerId, string playerName)  =>
 {
     var lobby = lobbies.FirstOrDefault(lobby => lobby.LobbyId == lobbyId);
-    if (lobby == null)
+      if (lobby == null)
         return Results.NotFound("Lobby not found");
     
     if (lobby.Players.Any(player => player.Id == playerId))
@@ -53,7 +51,7 @@ app.MapPost("JoinLobby", (string lobbyId, int playerId, string playerName) =>
         Name = playerName
     };
 
-    lobby.Players.Add(player);
+     lobby.Players.Add(player);
     return Results.Ok("Player added to the lobby");
 });
 
